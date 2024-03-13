@@ -16,4 +16,8 @@ class Product extends Model
         'product_image',
         'product_price',
     ];
+
+    protected $casts = [
+        'product_images' => 'array', // Cast the product_images attribute to an array
+    ];
 }

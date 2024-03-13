@@ -4,7 +4,8 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Route;
-
+// use Illuminate\Foundation\Auth\EmailVerificationRequest;
+// use Illuminate\Http\Request;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -20,7 +21,11 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/home', [HomeController::class, 'index'])->middleware('auth')->name('home');
+
+
+
+Route::get('/home', [HomeController::class, 'index'])->middleware('auth')->name('home')->middleware('verified');
+
 
 // Route::get('/dashboard', function () {
 //     return view('dashboard');

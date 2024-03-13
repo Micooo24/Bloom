@@ -1,5 +1,5 @@
 @extends('layouts.design')
-  
+
 @section('content')
     <div class="row">
         <div class="col-lg-12 margin-tb">
@@ -27,7 +27,7 @@
         @csrf
         @method('PUT')
       
-         <div class="row">
+        <div class="row">
             <div class="col-xs-12 col-sm-12 col-md-12">
                 <div class="form-group">
                     <strong>Product Name:</strong>
@@ -43,18 +43,23 @@
             <div class="col-xs-12 col-sm-12 col-md-12">
                 <div class="form-group">
                     <strong>Product Image:</strong>
-                    <input type="file" name="product_image" class="form-control" placeholder="image">
-                    <img src="/product_images/{{ $product->product_image }}" height ="100px"width="100px">
+                    <!-- Display current images -->
+                    @foreach (explode(',', $product->product_image) as $image)
+                        <img src="/product_image/{{ $image }}" height="100px" width="100px">
+                    @endforeach
+                    <!-- Allow updating images -->
+                    <input type="file" name="product_image[]" class="form-control" placeholder="Image" multiple>
                 </div>
             </div>
             <div class="col-xs-12 col-sm-12 col-md-12">
                 <div class="form-group">
                     <strong>Product Price:</strong>
-             <input type="number" step="0.01" name="product_price" value="{{ $product->product_price }}" class="form-control" placeholder="Price">
+                    <input type="number" step="0.01" name="product_price" value="{{ $product->product_price }}" class="form-control" placeholder="Price">
+                </div>
+            </div>
             <div class="col-xs-12 col-sm-12 col-md-12 text-center">
-              <button type="submit" class="btn btn-primary">Submit</button>
+                <button type="submit" class="btn btn-primary">Submit</button>
             </div>
         </div>
-      
     </form>
 @endsection
