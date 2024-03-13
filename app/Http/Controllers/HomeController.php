@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
+use App\Models\Product;
 
 class HomeController extends Controller
 {
@@ -13,7 +14,9 @@ class HomeController extends Controller
             $usertype=Auth()->user()->usertype;
 
             if($usertype == 'user'){
-                return view('dashboard');
+                $products = Product::all();
+                return view('dashboard', compact('products'));
+                
             }
             else if($usertype == 'admin'){
                 return view('admin.adminhome');
@@ -22,6 +25,17 @@ class HomeController extends Controller
                 return redirect()->back();
             }
         }
+       
     }
 
+    // public function display(){
+    //     $products = Product::all();
+    //     return view('dashboard', compact('products'));
+    // }
+
+
 }
+
+
+
+

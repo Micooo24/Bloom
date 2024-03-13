@@ -5,13 +5,26 @@
         </h2>
     </x-slot>
 
-    <div class="py-12">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
-                <div class="p-6 text-gray-900 dark:text-gray-100">
-                    {{ __("You're logged in!") }}
+    <!-- Add dd($products) here to debug -->    
+    <div class="row">
+    @foreach($products as $product)
+        <div class="col-md-4 mb-4">
+            <div class="card">
+                @if ($product->product_image)
+                    <img src="{{ asset('product_images/' . $product->product_image) }}" class="card-img-top" alt="{{ $product->product_name }}">
+                @else
+                    <div class="no-image">
+                        <p class="card-text">No Image Available</p>
+                    </div>
+                @endif
+                <div class="card-body">
+                    <h5 class="card-title">{{ $product->product_name }}</h5>
+                    <p class="card-text">{{ $product->product_description }}</p>
+                    <p class="card-text">Price: ${{ $product->product_price }}</p>
                 </div>
             </div>
         </div>
-    </div>
-</x-app-layout>
+    @endforeach
+</div>
+
+ </x-app-layout>

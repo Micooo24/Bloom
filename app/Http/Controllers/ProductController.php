@@ -18,6 +18,14 @@ class ProductController extends Controller
             ->with('i', (request()->input('page', 1) - 1) * 5);
     }
 
+    public function index()
+    {
+        $products = Product::all();
+        dd($products);
+        return view('dashboard', compact('products'));
+    }
+
+ 
 
     public function create()
     {

@@ -13,8 +13,7 @@ return new class extends Migration
     {
         Schema::create('carts', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->constrained('users');
-            $table->enum('status', ['active', 'pending', 'completed', 'canceled'])->default('active');
+            $table->foreignId('user_id')->constrained('users')->unique();
             $table->timestamps();
         });
     }
