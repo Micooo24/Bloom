@@ -1,6 +1,18 @@
-@extends('layouts.design')
-  
-@section('content')
+
+@extends('layouts.design') 
+
+
+
+<x-app-layout>
+<x-slot name="header">
+        <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
+            {{ __('Products') }}
+        </h2>
+    </x-slot>
+    
+    
+    
+
     <div class="row">
         <div class="col-lg-12 margin-tb">
             <div class="pull-left">
@@ -44,11 +56,11 @@
                     </div>
                     <a class="carousel-control-prev" href="#carousel{{ $product->id }}" role="button" data-slide="prev">
                         <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                        <span class="sr-only">Previous</span>
+
                     </a>
                     <a class="carousel-control-next" href="#carousel{{ $product->id }}" role="button" data-slide="next">
                         <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                        <span class="sr-only">Next</span>
+                        
                     </a>
                 </div>
             </td>
@@ -73,4 +85,6 @@
 <!-- Add Bootstrap JavaScript -->
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
-@endsection
+
+
+</x-app-layout>

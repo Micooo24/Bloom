@@ -24,12 +24,13 @@
                     </x-nav-link>
                 </div>
                 
-                @if(Auth::user()->usertype == 'admin')
+                @if(Auth::user()->usertype == 'admin')       
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
                     <x-nav-link :href="route('products.list')" :active="request()->routeIs('products.list')">
                         {{ __('Products') }}
                     </x-nav-link>
                 </div>
+
                 @endif
 
                 
