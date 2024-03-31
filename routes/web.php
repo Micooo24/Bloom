@@ -19,8 +19,14 @@ use App\Http\Controllers\CartController;
 */
 
 Route::get('/', function () {
+    
     return view('welcome');
 });
+Route::get('/', [ProductController::class, 'display']);
+
+
+//Search
+Route::get('/search', [ProductController::class, 'search']);
 
 
 
@@ -55,11 +61,11 @@ Route::middleware('auth')->group(function () {
 
 });
 
-Route::get('/workspace', function () {
-    return view('workspace');
-});
+// Route::get('/workspace', function () {
+//     return view('workspace');
+// });
  
-Route::get('/cart', 'CartController@index')->name('cart.blade.php');
+// Route::get('/cart', 'CartController@index')->name('cart.blade.php');
 
 
 require __DIR__.'/auth.php'; 

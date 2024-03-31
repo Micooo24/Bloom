@@ -1,8 +1,8 @@
 <style>
     .adjustable-logo {
-        margin-top: 35px;
-        width: 80px;
-        height: 80px;
+        margin-top: 5px;
+        width: 50px;
+        height: 50px;
     }
 
     .bg-header {
@@ -21,7 +21,7 @@
         width: 250px;
         height: 30px;
         padding: 0 10px;
-        margin-top: 80px;
+         margin-top: 5px; */
     }
 
     .search-icon {
@@ -30,10 +30,27 @@
 
     .cart-icon {
         margin-left: 8px;
+
+    }
+    .custom-nav {
+    background-color: #004236; /* Background color */
+    border-bottom: 1px solid #ccc; /* Border color */
+    /* Add more styles here as needed */
+    }
+    .search-btn {
+        background-color: #007bff; /* Button background color */
+        color: #fff; /* Button text color */
+        border: none; /* Remove default button border */
+        padding: 5px 10px; /* Adjust padding as needed */
+        cursor: pointer; /* Change cursor to pointer on hover */
+        transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out; /* Smooth transition for background color and text color */
+    }
+    .search-btn:hover {
+        background-color: #0056b3; /* Change background color on hover */
     }
 </style>
 
-<nav x-data="{ open: false }" class="bg-header dark:bg-black-800 border-b border-gray-100 dark:border-gray-700">
+<nav x-data="{ open: false }" class="custom-nav">
     <!-- Primary Navigation Menu -->
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="flex justify-between h-16">
@@ -47,13 +64,15 @@
                 </div>
 
                 <!-- Search Box -->
-                <div class="search-box">
-                    <div class="search-icon">
-                        <!-- Search icon -->
+             
+                    <form method = "get" action = /search>
+                    <div class = "input-group">
+                        <input class = "form-control" name = "search" placeholder = "Search..." value ="{{isset($search)? $search : ''}}">
+                        <button type="submit" class="search-btn">Search</button>
                     </div>
-                    <input type="text" placeholder="Search..." class="bg-gray-200 dark:bg-gray-800 px-3 py-1.5 rounded-md">
-                </div>
-
+                </form>
+             
+ 
                 <!-- Cart Icon -->
                 <div class="cart-icon">
                     <!-- Cart icon -->
@@ -61,14 +80,14 @@
             </div>
 
             <!-- Navigation Links -->
-            <div class="hidden space-x-8 md:-my-px md:ms-10 md:flex">
+            <div class="hidden space-x-8 md:-my-px md:ms-10 md:flex"style="color: #FFFFFF;">
                 <x-nav-link :href="route('home')" :active="request()->routeIs('home')">
                     {{ __('Dashboard') }}
                 </x-nav-link>
             </div>
             
             @if(Auth::user()->usertype == 'admin')       
-            <div class="hidden space-x-8 md:-my-px md:ms-10 md:flex">
+            <div class="hidden space-x-8 md:-my-px md:ms-10 md:flex" style="color: #FFFFFF;">
                 <x-nav-link :href="route('products.list')" :active="request()->routeIs('products.list')">
                     {{ __('Products') }}
                 </x-nav-link>

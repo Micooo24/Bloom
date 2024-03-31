@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Product;
-
+use Illuminate\Support\Facades\Auth;
 class ProductController extends Controller
 {
     //
@@ -25,6 +25,11 @@ class ProductController extends Controller
         return view('dashboard', compact('products'));
     }
 
+  public function display()
+    {
+        $products = Product::all();
+        return view('welcome')->with('products', $products);
+    }
  
 
     public function create()
@@ -216,4 +221,27 @@ public function destroy(Product $product)
     return redirect()->route('products.list')->with('success', 'Product deleted successfully.');
 }
 
+
+
+
+public function search(Request $request){
+    $search = $request->search;
+    
+    $products = Product::where(function ($query) use ($search) {
+        $query->where('product_name', 'LIKE', '%'.$search.'%');
+    })
+    ->orWhere(function ($query) use ($search) {
+        $query->where('product_description', 'LIKE', '%'.$search.'%');
+    }) 
+    ->paginate(10); // Paginate the results with 10 items per page
+    
+    if (Auth::user()->usertype === 'admin') {
+        return view('product.list', compact('products', 'search'));
+    } else {
+        return view('dashboard', compact('products', 'search'));
+    }
 }
+
+}
+
+
